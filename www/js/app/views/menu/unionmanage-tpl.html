@@ -1,0 +1,438 @@
+<div class="am-g am-panel am-panel-default">
+    <header class="am-panel-hd">
+        <h3 class="am-panel-title">工会角色管理</h3>
+    </header>
+<br/>
+    <div class="am-u-sm-12">
+        <div class="am-panel am-panel-default">
+            <div class="am-panel-bd">
+                <div class="am-g">
+                    <div class="am-u-sm-10">
+                        <input type="text" class="am-form-field am-round am-input-sm" placeholder="输入要查找的工会名称" data-bind="value: searchUnionName"/>
+                    </div>
+                    <div class="am-u-sm-2">
+                        <button class="am-btn am-btn-secondary am-btn-sm am-round" data-bind="click:searchUnionClick">
+                            <i class="am-icon-search"></i>&nbsp;搜索
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="am-hide" id="panelUnionContent">
+        <!-- tree -->
+        <div class="am-u-sm-3">
+            <div class="am-panel am-panel-default">
+                <div class="am-panel-bd" id="idTree">
+                    <ul class="am-tree am-tree-folder-select" role="tree">
+                        <li class="am-tree-branch am-hide" data-template="treebranch" role="treeitem" aria-expanded="false">
+                            <div class="am-tree-branch-header">
+                                <button class="am-tree-icon am-tree-icon-caret am-icon-caret-right"><span class="am-sr-only">Open</span></button>
+                                <button class="am-tree-branch-name">
+                                    <span class="am-tree-icon am-tree-icon-folder"></span>
+                                    <span class="am-tree-label"></span>
+                                </button>
+                            </div>
+                            <ul class="am-tree-branch-children" role="group"></ul>
+                            <div class="am-tree-loader" role="alert">Loading...</div>
+                        </li>
+                        <li class="am-tree-item am-hide" data-template="treeitem" role="treeitem">
+                            <button class="am-tree-item-name">
+                                <span class="am-tree-icon am-tree-icon-item"></span>
+                                <span class="am-tree-label"></span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- union info -->
+        <div class="am-u-sm-9 am-hide" id="panelUnionDetail">
+            <div class="am-panel am-panel-default">
+                <div class="am-panel-bd">
+                    <div class="am-tabs" data-am-tabs>
+                        <ul class="am-tabs-nav am-nav am-nav-tabs">
+                            <li class="am-active"><a href="#tab1">工会信息</a></li>
+                            <li><a href="#tab2" data-bind="click:getNamedRoleList">角色维护</a></li>
+                            <li><a href="#tab3" data-bind="click:getUnionUserRoleList">用户角色维护</a></li>
+                            <li><a href="#tab4" data-bind="click:getUnionTransferUser">用户角色转移</a></li>
+                        </ul>
+                        <div class="am-tabs-bd">
+                            <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                                <div class="am-panel-bd am-collapse am-in">
+                                    <div class="am-g">
+                                        <div class="am-u-sm-6">
+                                            <div class="am-input-group am-input-group-sm">
+                                                <span class="am-input-group-label">工会名称:</span>
+                                                <input type="text" class="am-form-field" data-bind="value: unionName" disabled id="unionName"/>
+                                            </div>
+                                        </div>
+                                        <div class="am-u-sm-6">
+                                            <div class="am-input-group am-input-group-sm">
+                                                <span class="am-input-group-label">工会性质:</span>
+                                                <input type="text" class="am-form-field" data-bind="value: unionType" readonly disabled id="unionType"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <div class="am-g">
+                                        <div class="am-u-sm-6">
+                                            <div class="am-input-group am-input-group-sm">
+                                                <span class="am-input-group-label">通讯地址(含邮编):</span>
+                                                <input type="text" class="am-form-field" data-bind="value: unionAddress" disabled id="unionAddress"/>
+                                            </div>
+                                        </div>
+                                        <div class="am-u-sm-6">
+                                            <div class="am-input-group am-input-group-sm">
+                                                <span class="am-input-group-label">组织机构代码:</span>
+                                                <input type="text" class="am-form-field" data-bind="value: unionOrgCode"  disabled id="unionOrgCode"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <div class="am-g">
+                                        <div class="am-u-sm-6">
+                                            <div class="am-input-group am-input-group-sm">
+                                                <span class="am-input-group-label">银行帐户号:</span>
+                                                <input type="text" class="am-form-field" data-bind="value: unionBankCard" disabled id="unionBankCard"/>
+                                            </div>
+                                        </div>
+                                        <div class="am-u-sm-6">
+                                            <div class="am-input-group am-input-group-sm">
+                                                <span class="am-input-group-label">银行帐户户名:</span>
+                                                <input type="text" class="am-form-field" data-bind="value: unionBankUserName"  disabled id="unionBankUserName"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <div class="am-g">
+                                        <div class="am-u-sm-6">
+                                            <div class="am-input-group am-input-group-sm">
+                                                <span class="am-input-group-label">开户银行名称:</span>
+                                                <input type="text" class="am-form-field" data-bind="value: unionBankName" disabled id="unionBankName"/>
+                                            </div>
+                                        </div>
+                                        <div class="am-u-sm-6">
+                                            <div class="am-input-group am-input-group-sm">
+                                                <span class="am-input-group-label">开户银行行号:</span>
+                                                <input type="text" class="am-form-field" data-bind="value: unionBankCode"  disabled id="unionBankCode"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <div class="am-g">
+                                        <div class="am-u-sm-6">
+                                            <div class="am-input-group am-input-group-sm">
+                                                <span class="am-input-group-label">辖区单位总数:</span>
+                                                <input type="text" class="am-form-field" data-bind="value: unionCompanyNumber" readonly disabled id="unionCompanyNumber"/>
+                                            </div>
+                                        </div>
+                                        <div class="am-u-sm-6">
+                                            <div class="am-input-group am-input-group-sm">
+                                                <span class="am-input-group-label">职工总数:</span>
+                                                <input type="text" class="am-form-field" data-bind="value: unionEmployeeNum" readonly disabled id="unionEmployeeNum"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <div class="am-g">
+                                        <div class="am-u-sm-6">
+                                            <div class="am-input-group am-input-group-sm">
+                                                <span class="am-input-group-label">已建会单位数:</span>
+                                                <input type="text" class="am-form-field" data-bind="value: unionLinkedCompanyNum" readonly disabled id="unionLinkedCompanyNum"/>
+                                            </div>
+                                        </div>
+                                        <div class="am-u-sm-6">
+                                            <div class="am-input-group am-input-group-sm">
+                                                <span class="am-input-group-label">会员数:</span>
+                                                <input type="text" class="am-form-field" data-bind="value: unionMemberNum" readonly disabled id="unionMemberNum"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <ul class="am-list admin-content-task">
+                                        <li>
+                                            <div class="am-cf">
+                                                <div class="am-btn-toolbar am-fr">
+                                                    <div class="am-btn-group am-btn-group-xs">
+                                                        <button type="button" class="am-btn am-btn-default" data-bind="click: editUnionBasicInfo" id="btnEditUnionBasicInfo"><span class="am-icon-pencil am-text-primary"></span></button>
+                                                        <button type="button" class="am-btn am-btn-default" data-bind="click: submitUnionBasicInfo" id="btnSubmitUnionBasicInfo"><span class="am-icon-check"></span></button>
+                                                        <button type="button" class="am-btn am-btn-default" data-bind="click: cancelUnionBasicInfo" id="btnCancelUnionBasicInfo"><span class="am-icon-times"></span></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="am-tab-panel am-fade" id="tab2">
+                                <div>
+                                    <table class="am-table am-table-striped am-table-hover am-table-compact">
+                                        <thead>
+                                        <tr>
+                                            <th>角色名</th><th>角色类别</th><th>基础角色</th><th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach: namedRoleList">
+                                            <tr>
+                                                <td data-bind="text: $data.name"></td>
+                                                <td data-bind="text: $data.category"></td>
+                                                <td data-bind="text: $data.parent.name"></td>
+                                                <!-- ko if: $data.isNewRow == false -->
+                                                <td>
+                                                    <div class="am-btn-toolbar">
+                                                        <div class="am-btn-group am-btn-group-xs">
+                                                            <button class="am-btn am-btn-secondary am-btn-xs" data-bind="click: $parent.modifyRole"><span class="am-icon-pencil-square-o"></span> 修改</button>
+                                                            <button class="am-btn am-btn-danger am-btn-xs" data-bind="click: $parent.deleteRole"><span class="am-icon-trash-o"></span> 删除</button>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <!-- /ko -->
+                                                <!-- ko if: $data.isNewRow == true -->
+                                                <td>
+                                                    <div class="am-btn-toolbar">
+                                                        <div class="am-btn-group am-btn-group-xs">
+                                                            <button class="am-btn am-btn-success am-btn-xs" data-bind="click: $parent.addNewRole"><span class="am-icon-copy"></span> 新增</button>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <!-- /ko -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="am-panel am-panel-default am-hide" id="panelCreateRole">
+                                    <div class="am-panel-bd">
+                                        <div style="min-height: 300px;">
+                                            <div>
+                                                <div class="am-u-sm-3">
+                                                    角色名
+                                                </div>
+                                                <div class="am-u-sm-4">
+                                                    基本角色
+                                                </div>
+                                                <div class="am-u-sm-3">
+                                                    访问权限
+                                                </div>
+                                                <div class="am-u-sm-2">
+                                                    &nbsp;
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div class="am-u-sm-3">
+                                                    <input type="text" class="am-form-field am-radius am-input-sm" placeholder="自定义角色名" data-bind="value: roleNmae"/>
+                                                </div>
+                                                <div class="am-u-sm-4">
+                                                    <select class="js-base-role-single" style="width: 100%"
+                                                            data-bind="value: selectedRole,
+                                                options: baseRoles, optionsText: 'name', optionsValue: 'id'">
+                                                    </select>
+                                                </div>
+                                                <div class="am-u-sm-3">
+                                                    <label class="am-checkbox am-secondary">
+                                                        <input type="checkbox" data-am-ucheck class="wtu-uckeck" data-bind="checked:viewPermission"> 查看
+                                                    </label>
+                                                    <label class="am-checkbox am-secondary">
+                                                        <input type="checkbox" data-am-ucheck class="wtu-uckeck" data-bind="checked:modifyPermission"> 修改
+                                                    </label>
+                                                    <label class="am-checkbox am-secondary">
+                                                        <input type="checkbox" data-am-ucheck class="wtu-uckeck" data-bind="checked:deletePermission"> 删除
+                                                    </label>
+                                                </div>
+                                                <div class="am-u-sm-2">
+                                                    <button class="am-btn am-btn-secondary am-btn-sm" data-bind="click: saveRole, text:txtRoleSaveBtn"></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="am-tab-panel am-fade" id="tab3">
+                                <div style="min-height: 300px;">
+                                    <div>
+                                        <div class="am-u-sm-5">
+                                            角色名
+                                        </div>
+                                        <div class="am-u-sm-5">
+                                            用户名
+                                        </div>
+                                        <div class="am-u-sm-2">
+                                            &nbsp;
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="am-u-sm-5">
+                                            <select class="js-basic-single" style="width: 100%"
+                                                    data-bind="value: selectedUnionRole,
+                                                    options: unionRoleList, optionsText: 'name', optionsValue: 'id',  event: { change: setSelectedUnionRole }">
+                                            </select>
+                                        </div>
+                                        <div class="am-u-sm-5">
+                                            <select class="js-basic-single" style="width: 100%"
+                                                    data-bind="value: selectedUser,
+                                                    options: userList, optionsText: 'name', optionsValue: 'id'">
+                                            </select>
+                                        </div>
+                                        <div class="am-u-sm-2">
+                                            <button class="am-btn am-btn-secondary am-btn-sm" data-bind="click: createUserRole">分配角色</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="am-hide" id="tblUserRole">
+                                    <table class="am-table am-table-bd am-table-striped am-table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>真实姓名</th><th>用户名</th><th>自定义角色</th><th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach: userRoleList">
+                                        <tr>
+                                            <td data-bind="text: $data.name"><label ></label></td>
+                                            <td data-bind="text: $data.username"><label ></label></td>
+                                            <td data-bind="text: $data.roleName"><label ></label></td>
+                                            <td>
+                                                <div class="am-btn-toolbar">
+                                                    <div class="am-btn-group am-btn-group-xs">
+                                                        <button class="am-btn am-btn-danger am-btn-xs" data-bind="click: $parent.deleteUserRole"><span class="am-icon-trash-o"></span> 删除</button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="am-tab-panel am-fade" id="tab4">
+                                <div style="min-height: 350px;">
+                                    <div>
+                                        <div class="am-u-sm-4">
+                                            用户名
+                                        </div>
+                                        <div class="am-u-sm-4">
+                                            目标工会
+                                        </div>
+                                        <div class="am-u-sm-2">
+                                            是否保留原角色
+                                        </div>
+                                        <div class="am-u-sm-2">
+                                            &nbsp;
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="am-u-sm-4">
+                                            <select class="js-transfer-basic-single" style="width: 100%"
+                                                    data-bind="value: selectedTransferUser">
+                                            </select>
+                                        </div>
+                                        <div class="am-u-sm-4">
+                                            <select class="js-basic-single" style="width: 100%"
+                                                    data-bind="value: selectedDestUnion,
+                                                    options: destUnionList, optionsText: 'name', optionsValue: 'id'">
+                                            </select>
+                                        </div>
+                                        <div class="am-u-sm-2">
+                                            <label class="am-checkbox am-secondary">
+                                                <input type="checkbox" data-am-ucheck class="wtu-uckeck" data-bind="checked: isDuplicated">
+                                            </label>
+                                        </div>
+                                        <div class="am-u-sm-2">
+                                            <button class="am-btn am-btn-secondary am-btn-sm" data-bind="click: transferUser">角色转移</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="am-modal am-modal-alert" tabindex="-1" id="create-success">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">角色维护结果</div>
+        <div class="am-modal-bd">
+            <div>
+                <label data-bind="text: app.ui.unionmanage.result.success"></label>
+            </div>
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn">确定</span>
+        </div>
+    </div>
+</div>
+
+<div class="am-modal am-modal-alert" tabindex="-1" id="create-fail">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">角色维护结果</div>
+        <div class="am-modal-bd">
+            <div>
+                <label data-bind="text: app.ui.unionmanage.result.fail"></label>
+            </div>
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn">确定</span>
+        </div>
+    </div>
+</div>
+
+<div class="am-modal am-modal-alert" tabindex="-1" id="search-null">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">搜索工会结果</div>
+        <div class="am-modal-bd">
+            <div>
+                <label data-bind="text: app.ui.unionmanage.search.result.null"></label>
+            </div>
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn">确定</span>
+        </div>
+    </div>
+</div>
+
+<div class="am-modal am-modal-alert" tabindex="-1" id="union-base-update">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">工会基本信息更新结果</div>
+        <div class="am-modal-bd">
+            <div>
+                <label data-bind="text: app.ui.unionmanage.union.baseinfo.update.success"></label>
+            </div>
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn">确定</span>
+        </div>
+    </div>
+</div>
+
+<div class="am-modal am-modal-alert" tabindex="-1" id="transfer-result">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">角色转移结果</div>
+        <div class="am-modal-bd">
+            <div>
+                <label data-bind="text: app.ui.unionmanage.transfer.success"></label>
+            </div>
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn">确定</span>
+        </div>
+    </div>
+</div>
+<div class="am-modal am-modal-alert" tabindex="-1" id="errorAlert">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">出错啦</div>
+        <div class="am-modal-bd" data-bind="foreach: errorMsgs">
+            <label class="checkbox">
+                <span data-bind="text: $data.message"></span>
+            </label>
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn">确定</span>
+        </div>
+    </div>
+</div>
+<a href="#" class="am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}">
+    <span class="am-icon-btn am-icon-th-list"></span>
+</a>

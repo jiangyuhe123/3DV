@@ -1,0 +1,722 @@
+/*
+-----------------------------------
+YOUR STYLES GO HERE
+-----------------------------------
+*/
+/* ********************************************* */
+/* LAYOUT */
+html {
+  overflow-y: scroll;
+}
+.module {
+  margin-bottom: 25px;
+}
+.module div[class*="span"],
+.module section[class*="span"] {
+  margin-bottom: 0;
+}
+
+.footer .navbar-inner {
+	background-color: #bfc2c5;
+	min-height: 24px;
+}
+.footer .navbar-inner  div  div[class*="span"] {
+	margin-bottom: 0;
+	min-height: 24px;
+	font-size: 9px;
+	padding-top: 2px;
+}
+.input-mini-minus {
+	width: 50px;
+}
+/* ********************************************* */
+/* TEXT */
+.date {
+  white-space: nowrap;
+}
+.hide {
+  display: none;
+}
+/* ********************************************* */
+/* REUSABLE COMPONENTS */
+/* Meters (bar, gauge, donut) */
+.meters.stacked fieldset {
+  margin-bottom: 5px;
+}
+.meters.stacked label {
+  display: inline-block;
+  white-space: nowrap;
+  width: 10em;
+  margin-right: 15px;
+  text-align: right;
+  vertical-align: top;
+}
+.meters.stacked .value,
+.meters.stacked .units {
+  display: inline-block;
+}
+.meters.stacked .meter.linear {
+  display: inline-block;
+  width: 150px;
+ 
+  margin-top: 8px;
+}
+/* Linear Meter Binding Handler */
+.meter.linear {
+  position: relative;
+  vertical-align: top;
+}
+.meter.linear .scale {
+  height: 4px;
+  background-color: #76b900;
+  position: relative;
+  border-radius: 2px;
+}
+.meter.linear .scale .limit {
+  height: 100%;
+  position: absolute;
+}
+.meter.linear .scale .limit.low {
+  left: 0;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+.meter.linear .scale .limit.high {
+  right: 0;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+.meter.linear .scale .limit.warning {
+  background-color: #f4b366;
+}
+.meter.linear .scale .limit.error {
+  background-color: #ee3324;
+}
+.meter.linear .scale .limit.success {
+  background-color: #76b900;
+}
+.meter.linear .pointer {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-position: top center;
+}
+.meter.linear .pointer.success {
+  background-image: url('../../img/meter/success/pointer.png');
+}
+.meter.linear .pointer.warning {
+  background-image: url('../../img/meter/warning/pointer.png');
+}
+.meter.linear .pointer.error {
+  background-image: url('../../img/meter/error/pointer.png');
+  font-weight: bold;
+}
+.meter.linear .pointer .value {
+  margin-top: 6px;
+  font-size: 0.85em;
+  white-space: nowrap;
+}
+/* Asset Hierarchy Tree */
+.assetHierarchy .error a {
+  color: #cc0000;
+}
+.assetHierarchy .warning a {
+  color: #f4b366;
+}
+.assetHierarchy .offline a {
+  color: #999c9f;
+}
+.assetHierarchy .success a {
+  color: #76b900;
+}
+.assetHierarchy .searchAssets {
+  width: 75%;
+}
+.assetHierarchy .searchAssets input {
+  margin-bottom: 1em;
+ 
+}
+.assetHierarchy .jstree-clicked {
+  font-weight: bold;
+}
+/* Asset Grid */
+.valveThumb div {
+  width: 51px;
+  height: 69px;
+  background-image: url('../../img/valveTypes/ovp25.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.valveThumb .unAck {
+  width: 51px;
+  height: 69px;
+  background-image: url('../../img/valveTypes/ovp25unack.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.valveThumb .butterfly {
+  background-image: url('../../img/valveTypes/butterfly.png');
+}
+.valveThumb .control {
+  background-image: url('../../img/valveTypes/control.png');
+}
+.valveThumb .safety {
+  background-image: url('../../img/valveTypes/safety.png');
+}
+/* ********************************************* */
+/* STATUS INDICATORS */
+.error svg.visualization-bar rect.fg {
+  fill: #ee3324;
+}
+.warning svg.visualization-bar rect.fg {
+  fill: #ed8000;
+}
+.success svg.visualization-bar rect.fg {
+  fill: #76b900;
+}
+table.dataTable {
+  /*success*/
+
+}
+table.dataTable .status_1 {
+  color: #f4b366;
+}
+table.dataTable .status_2 {
+  color: #ee3324;
+  font-weight: bold;
+}
+table.dataTable .numeric {
+  text-align: left;
+}
+table.dataTable .date {
+  text-align: left;
+}
+table.dataTable .gauge {
+  text-align: center;
+}
+/* ********************************************* */
+/* ASSETS MODULE */
+.assets .subsection {
+  clear: both;
+  border: 1px solid #e1e2e5;
+  border-radius: 2px;
+  padding: 10px;
+  margin: 10px 0;
+}
+.assets .subsection section {
+  margin-left: 15px;
+}
+.assets .subsection:last-child {
+  border-bottom: none;
+}
+.assets .asset {
+  float: left;
+  margin: 4px;
+  text-align: center;
+}
+.assets .asset .valveThumb {
+  border: none;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+.assets .asset .valveThumb div {
+  padding: 5px;
+}
+.assets .asset.success .name,
+.assets .asset.status_0 .name {
+  color: #76b900;
+}
+.assets .asset.success .valveThumb div,
+.assets .asset.status_0 .valveThumb div {
+  
+  background-color: white;
+  border-style:solid;
+  border-color: #e5eed4;
+  border-width: 2px;
+}
+.assets .asset.warning .name,
+.assets .asset.status_1 .name {
+  color: #f4b366;
+}
+.assets .asset.warning .valveThumb div,
+.assets .asset.status_1 .valveThumb div {
+  
+  background-color: white;
+  border-style:solid;
+  border-color: #f4b366;
+  border-width: 2px;
+}
+.assets .asset.error .name,
+.assets .asset.status_2 .name {
+  color: #ee3324;
+  font-weight: bold;
+}
+.assets .asset.error .valveThumb div,
+.assets .asset.status_2 .valveThumb div {
+  
+  background-color: white;
+  border-style:solid;
+  border-color: #ff4719;
+  border-width: 2px;
+}
+.assets .asset.offline .name,
+.assets .asset.status_3 .name {
+  color: #999c9f;
+}
+.assets .asset.offline .valveThumb div,
+.assets .asset.status_3 .valveThumb div {
+  
+  background-color: white;
+  border-style:solid;
+  border-color: #999c9f;
+  border-width: 2px;
+}
+/* ********************************************* */
+/* ASSET SUMMARY MODULE */
+.assetSummary dl {
+  margin: 0;
+}
+.assetSummary dl dt {
+  width: 40%;
+}
+.assetSummary dl dd {
+  margin-left: 40%;
+}
+/* ********************************************* */
+/* TEST HISTORY MODULE */
+.testHistory table .date {
+  width: 20%;
+}
+.testHistory table .numeric {
+  width: 12%;
+}
+/* ********************************************* */
+/* TEST DETAIL MODULE */
+.testDetail .kpis {
+  margin-top: 30px;
+}
+.testDetail .kpis fieldset {
+  margin-bottom: 0px;
+}
+.testDetail .kpis label {
+  display: inline-block;
+  white-space: nowrap;
+  width: 10em;
+  margin-right: 15px;
+  text-align: right;
+  vertical-align: top;
+  width: 150px;
+}
+.testDetail .kpis .value,
+.testDetail .kpis .units {
+  display: inline-block;
+}
+.testDetail .chart {
+  width: 100%;
+  height: 300px;
+  margin: 5px auto;
+}
+/* ********************************************* */
+/* PERFORMANCE MODULE */
+.performance label {
+  font-weight: bold;
+  text-align: right;
+}
+.performance .chart {
+  height: 200px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+/* ********************************************* */
+/* CONFIGURE PAGE */
+.module.draggable {
+  height: auto;
+}
+#available_assets {
+  margin-left: -20px;
+  background-color: #6495ED;
+  font-weight: bold;
+}
+.hide_assets {
+  display: none;
+}
+.module.draggable .module-body {
+  height: auto;
+}
+.row {
+  display: table-row;
+  height: 30px;
+}
+.col {
+  display: table-cell;
+  text-align: left;
+  padding-left: 20px;
+}
+.col input {
+  width: 205px;
+}
+.scanned-background {
+  width: 20%;
+}
+.jstree-default .jstree-clicked {
+  list-style-type: circle;
+  color: #3b73b9;
+}
+.angelBox {
+  margin-left: 100px;
+  position: relative;
+}
+.wing {
+  width: 350px;
+  background-color: white;
+  display: none;
+}
+.rightWing {
+  position: absolute;
+  border: 1px solid red;
+  z-index: 1000;
+  right: -350px;
+  top: 50px;
+}
+#scanned_assets {
+  margin-top: 20px;
+}
+.ui-slider-horizontal {
+  height: 1.2em;
+}
+.ui-slider .ui-slider-handle {
+  height: 1.6em;
+}
+#availableAsset {
+  z-index: 1000,
+	position:fixed;
+  top: 0;
+  left: 0;
+}
+#wrapper {
+  overflow: hidden;
+  width: 650px;
+}
+.scroller {
+  height: 925px;
+  overflow: auto;
+}
+.searchbox {
+  margin-bottom: 15px;
+}
+/* ********************************************* */
+/* ADMIN PAGE */
+
+section#settings form.inline-label label {
+  display: inline-block;
+}
+section#settings form.defaults .control-group .control-label {
+  width: 280px;
+}
+section#settings form.defaults .control-group .controls {
+  margin-left: 300px;
+}
+section#settings form.form-horizontal .hartrows {
+  padding-bottom: 11px;
+}
+@media (max-width: 480px) {
+  section#settings form.defaults .control-group .control-label {
+    width: auto;
+  }
+  section#settings form.defaults .control-group .controls {
+    margin-left: 0;
+  }
+}
+#asset_hierarchy .nav-tabs.nav-stacked > li > a:focus {
+  background-color: #ddd;
+}
+section#settings form#device_limits {
+  margin-top: 10px;
+}
+.content-header header {
+  margin-bottom: 20px;
+}
+div.schedule .assetHierarchy,
+div#activity .activityLog {
+  overflow-y: auto;
+  height: 250px;
+  max-height: 300px;
+  background-color: #f7f8fa;
+  border: 1px solid #e1e2e5;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border linear .2s, box-shadow linear .2s;
+  -moz-transition: border linear .2s, box-shadow linear .2s;
+  -o-transition: border linear .2s, box-shadow linear .2s;
+  transition: border linear .2s, box-shadow linear .2s;
+  padding: 5px;
+ }
+ div#activity .activityLog {
+  height: 350px;
+  max-height: 375px;
+ }
+ div.schedule .jstree a {
+	font-family: ge-inspira, Arial,"Helvetica Neue",Helvetica,sans-serif;
+	font-size: 14px;
+	line-height: 20px;
+	color: #313337;
+ }
+  ul#scheduleValve {
+  margin-left: 5px;
+  }
+ ul#scheduleValve li{
+ 	list-style-type: none;
+ }
+.mb10 {
+  margin-bottom: 10px;
+}
+input.validationElement {
+  border-color: #ee3324;  
+  margin-bottom: 0;
+  margin-right: 4px;
+}
+.validationElement,
+.validationElement button {
+  color: #ee3324;
+  border-color: #ee3324;  
+}
+.validationMessage {
+  display: inline-block;
+  font-size: 12px;
+  color: #ee3324;
+  line-height: 12px;
+}
+form.hartdevice.form-horizontal .controls {
+	margin-left: 0;
+	
+}
+/*images for jstree*/
+/*.jstree a > ins{
+	width: 21px !important;
+}*/
+
+.trueadded {
+	background-color: #B8B8B8;
+}
+
+.contentBold {
+	font-weight: bold;
+}
+.capitalize {
+	text-transform:capitalize;
+}
+/* scroll for tree */
+#jstree {
+	overflow-y: auto;
+	max-height: 955px;
+}
+#assetTree {
+	overflow-y: auto;
+	max-height: 955px;
+}
+#asset_grid {
+	overflow-y: auto;
+	max-height: 1000px;
+}
+
+#settings .schedhourmin, #historianTags .schedhourmin {
+  width: 50px;
+}
+
+#checking {
+	overflow-y: auto;
+	max-height: 750px;
+}
+
+
+/*ellipsis for dashboard*/
+.nameWrap{
+	overflow: hidden;
+	white-space:nowrap;
+	-ms-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	width: 75px;
+}
+.popover-title {
+	overflow: hidden;
+	white-space:nowrap;
+	-ms-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	width: 250px;
+}
+.qTestStatus_1 {
+	 background-image: url('../../img/iids/bitmap/warning.png');
+	 background-repeat: no-repeat;
+	 margin-left: 10px;
+	 width: 25px;
+	 height: 20px;
+}
+.noText {
+	font-size: 0px;
+}
+.errlimits .notes div {
+	min-height: 1px;
+	height: auto;
+}
+.errlimits small {
+	font-size: 75%;
+	font-style: italic;
+	color: #999c9f;
+}
+
+/* BROWSER SPECIFIC STYLES */
+.ie input[type="text"], input[type="password"]
+{
+	height: 20px; 
+	line-height: 20px;
+}
+
+/* Data Tables */
+table.dataTable td,
+table.dataTable td {
+	padding: 2px;
+	border: 1px solid #fff;
+}
+table.dataTable tbody tr.odd td {
+	background: #F0F8FF;
+}
+table.dataTable td {
+	height: 30px;
+	padding: 3px 18px 3px 10px;
+}
+table.dataTable tr th {
+	height: 30px;
+}
+table.dataTable .row_selected td {
+  color: #ffffff;
+  background-color: #749BCD !important;
+}
+
+#opcScanTree {
+	overflow-y: auto;
+	max-height: 250px;
+}
+li[nodetype="S"] > a{
+	color:#3b73b9;
+}
+
+/*blue scaned added asset */
+li[nodetype="D"] > a{
+	color:grey;
+}
+
+.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
+	background-color: #3b73b9;
+}
+#piAssetTable_filter {
+	float: left;
+	text-align: left;
+}
+.pi-table {
+    width: 100%;    
+    border: solid 1px #DDEEEE;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font: normal 13px ge-inspira, Arial, sans-serif;
+}
+.pi-table thead th {
+	background-color: #3f4145
+    border: solid 1px #DDEEEE;
+    padding: 5px;
+    text-align: left;
+}
+.pi-table tbody td {
+    border: solid 1px #DDEEEE;
+    padding: 5px;
+    word-wrap:break-word;
+}
+
+.pi-table tbody td .emptyrow {
+    margin: 8px;    
+}
+
+.pi-table tbody td .marginsmall {
+    margin-top: 4px;    
+}
+
+.performance .largechart {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+
+.accordion .label_align { 
+	position:static; 
+	width:auto; 
+	text-align:left; 
+}
+
+.charts hr { 
+	margin-top:5px; 
+	margin-bottom:20px;
+}
+
+.spacer {
+	width: 5px; 
+	height: 5px;
+}
+.grcYes{
+	color: red !important;
+	margin-left: 1% !important;
+}
+.grcNo{
+	color: green !important;
+	margin-left: 1% !important;
+}
+.attributes .scrollable {
+	height: 100px;
+	overflow-y: auto;
+}
+.icon-margin-right {
+	margin-right : 10px;
+}
+
+.positioner .module { 
+     margin-bottom: 0px; 
+ }
+ .status_0 {
+ 	color: #76b900;
+ }
+ .status_1 {
+ 	 color: #f4b366;
+ }
+ .status_2 {
+ 	color: #cc0000;
+ }
+ .firmware {
+ height: 50px;
+ }
+ 
+ .pipoints .dataTables_scrollBody {
+  overflow-x:hidden !important;
+  width: 520px;
+}
+
+ .pipoints .modal-body {
+  max-height:none !important;
+}
+
+.pipoints .dataTable td {
+  height: 0px;
+  padding: 3px 0px 3px 0px;
+  word-wrap:break-word;
+  word-break: break-all;
+}
+
+.pipoints table.dataTable tbody tr.odd:hover td {
+  background: #B1C7E3;
+}
+
+.pipoints table.dataTable tbody tr.even:hover td {
+  background: #B1C7E3;
+}
+
+.loginImage {
+	background-image: url('../../img/valveTypes/Picture1.jpeg');
+	height: 800px;
+}

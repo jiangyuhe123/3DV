@@ -1,0 +1,7 @@
+/* Write your styles */
+body{ background:#eee;}
+.wrapper{ }
+.nav-top{ line-height:5rem; color:#ffffff; background-color: orangered;}
+.am-slider-default .am-control-nav{ text-align:left; bottom:10px;}
+.promotion img{ height:20rem;}
+.am-list li{margin-top:.8rem;}

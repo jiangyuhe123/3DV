@@ -1,0 +1,123 @@
+<div class="am-g">
+<div class="wtu-login">
+    <div class="inner-wrapper am-g">
+        <div class="am-u-sm-6 padding">
+            <h1 class="logo">云工社</h1>
+            <p>
+                管理您的云工社
+            </p>
+        </div>
+        <div class="am-u-sm-6">
+            <div class="view">
+                <div class="am-text-lg am-text-left" data-bind="text: app.ui.login.title"></div>
+                <br/>
+                <div>
+                    <input type="text" class="am-form-field am-radius" placeholder="请输入用户名" data-bind="value: username">
+                </div>
+                <br/>
+                <div>
+                    <input type="password" class="am-form-field am-radius" placeholder="请输入密码" data-bind="value: password">
+                </div>
+                <br/>
+                <div>
+                    <button type="button" class="am-btn am-btn-secondary am-radius am-btn-sm am-btn-block am-text-sm" data-bind="click:btnLoginClick, text:app.ui.login.button.login"></button>
+                </div>
+                <br/>
+                <div class="am-g">
+                    <div class="am-u-sm-6">
+                        <div class="checkbox">
+                            <label for="remember-me">
+                                <input id="remember-me" type="checkbox" data-bind="checked:rememberMe, click:saveCheckBoxCookie"> 记住我
+                            </label>
+                        </div>
+                    </div>
+                    <div class="am-u-sm-6 am-text-right">
+                        <!--<a class="am-text-sm forgetpw" data-bind="text: app.ui.login.forgetpw"></a>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- advantage -->
+<div class="am-container m-width index-pro">
+    <fieldset class="pro-products am-fl">
+        <legend>打开您的智慧云之门</legend>
+            <div>
+                <h3>
+                    <span>Cloud</span>
+                    云管理
+                </h3>
+                <p>
+                    <span>开放式平台管理</span>
+                    帮助企业工会更好的管理工会资源
+                    <br/>
+                    HTML5跨屏网页应用，自适应PC和各种移动设备
+                </p>
+            </div>
+            <div>
+                <h3>
+                    <span>Reactive</span>
+                    响应式
+                </h3>
+                <p>
+                    <span>互动式响应平台</span>
+                    及时获取信息动态
+                    <br/>
+                    主动式消息推送，更人性化的页面相应
+                </p>
+            </div>
+            <div>
+                <h3>
+                    <span>Simplified</span>
+                    简明化
+                </h3>
+                <p>
+                    <span>简易式操作流程</span>
+                    更简单，更容易的操作流程
+                    <br/>
+                    教程式操作指导，让您更快，更容易的管理
+                </p>
+            </div>
+    </fieldset>
+</div>
+<div class="am-modal am-modal-alert" tabindex="-1" id="login-fail">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">登陆结果</div>
+        <div class="am-modal-bd">
+            <div>
+                <label data-bind="text: app.ui.login.fail"></label>
+            </div>
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn">确定</span>
+        </div>
+    </div>
+</div>
+<div class="am-modal am-modal-alert" tabindex="-1" id="login-fail-premission">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">登陆结果</div>
+        <div class="am-modal-bd">
+            <div>
+                <label data-bind="text: app.ui.login.unsufficent.permission"></label>
+            </div>
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn">确定</span>
+        </div>
+    </div>
+</div>
+<div class="am-modal am-modal-alert" tabindex="-1" id="errorAlert">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">出错啦</div>
+        <div class="am-modal-bd" data-bind="foreach: errorMsgs">
+            <label class="checkbox">
+                <span data-bind="text: $data.message"></span>
+            </label>
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn">确定</span>
+        </div>
+    </div>
+</div>

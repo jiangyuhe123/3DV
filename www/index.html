@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="Cache-Control" content="no-siteapp, no-cache, no-store" />
+
+        <link rel="alternate icon" type="image/png" href="img/favicon.png">
+        <link rel="stylesheet" href="css/vendor/amazeui.min.css"/>
+        <link rel="stylesheet" href="css/vendor/amazeui.tree.min.css"/>
+        <title>云工社管理-test</title>
+    </head>
+    <body>
+        <!-- Header -->
+        <header>
+            <section id="header" data-bind="template:{name: template, afterRender: myPostProcessingLogic}"></section>
+        </header>
+
+        <!-- Modules -->
+        <div class="am-cf admin-main">
+            <!-- sidebar -->
+            <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+                <section id="sidebar" data-bind="template:{name:template, afterRender: myPostProcessingLogic}"></section>
+            </div>
+
+            <!-- content -->
+            <div class="admin-content">
+                <section id="content" data-bind="template:{name:template, afterRender: myPostProcessingLogic}"></section>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <section id="navbar" data-bind="template:{name: template, afterRender: myPostProcessingLogic}"></section>
+        </footer>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" data-main="js/index" src="./js/vendor/require.js"></script>
+    </body>
+</html>

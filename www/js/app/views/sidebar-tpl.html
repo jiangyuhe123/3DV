@@ -1,0 +1,40 @@
+<div class="am-offcanvas-bar admin-offcanvas-bar">
+    <ul class="am-list admin-sidebar-list">
+        <li><a href="#/"><span class="am-icon-home " data-bind="text:app.ui.sidebar.menu.home"></span></a></li>
+        <li class="admin-parent">
+            <a class="am-cf" data-am-collapse="{target: '#collapse-nav1'}"><span class="am-icon-envelope" data-bind="text:app.ui.dashboard.menu.register.management"></span><span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+            <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav1">
+                <li><a href="#/menu/approval"><span class="am-icon-certificate" data-bind="text:app.ui.dashboard.menu.approval"></span></a></li>
+                <li><a href="#/menu/cardapproval"><span class="am-icon-credit-card" data-bind="text:app.ui.dashboard.menu.cardapproval"></span></a></li>
+                <li><a href="#/menu/tenantapproval"><span class="am-icon-apple" data-bind="text:app.ui.dashboard.menu.tenantapproval"></span></a></li>
+            </ul>
+        </li>
+        <li><a href="#/menu/batchcreate"><span class="am-icon-user-plus " data-bind="text:app.ui.dashboard.menu.user.create.batch"></span></a></li>
+        <li><a href="#/menu/unionaddress"><span class="am-icon-location-arrow " data-bind="text:app.ui.dashboard.menu.union.address.relation"></span></a></li>
+        <!--<li><a href="#/menu/statistics"><span class="am-icon-bar-chart-o " data-bind="text:app.ui.dashboard.menu.statistics"></span></a></li>-->
+        <li class="admin-parent">
+            <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-bank " data-bind="text:app.ui.dashboard.menu.union.management"></span><span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+            <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
+                <li><a href="#/menu/unionmanage" class="am-cf"><span class="am-icon-street-view" data-bind="text:app.ui.dashboard.menu.union.search"></span></a></li>
+                <li><a href="#/menu/unionquicksearch" class="am-cf"><span class="am-icon-globe" data-bind="text:app.ui.dashboard.menu.union.unionquicksearch"></span></a></li>
+                <li><a href="#/menu/enterprisequicksearch" class="am-cf"><span class="am-icon-building" data-bind="text:app.ui.dashboard.menu.union.enterprisequicksearch"></span></a></li>
+                <li><a href="#/menu/userquicksearch" class="am-cf"><span class="am-icon-users" data-bind="text:app.ui.dashboard.menu.union.userquicksearch"></span></a></li>
+            </ul>
+        </li>
+        <li><a href="##" data-bind="event: {click: logout}"><span class="am-icon-sign-out " data-bind="text:app.ui.dashboard.menu.logout"></span></a></li>
+    </ul>
+
+    <div class="am-panel am-panel-default admin-sidebar-panel">
+        <div class="am-panel-bd">
+            <p><span class="am-icon-bookmark"></span> 公告</p>
+            <p>时光静好，与君语；细水流年，与君同。</p>
+        </div>
+    </div>
+
+    <div class="am-panel am-panel-default admin-sidebar-panel">
+        <div class="am-panel-bd">
+            <p><span class="am-icon-tag"></span> wiki</p>
+            <p>Welcome to the wiki!</p>
+        </div>
+    </div>
+</div>

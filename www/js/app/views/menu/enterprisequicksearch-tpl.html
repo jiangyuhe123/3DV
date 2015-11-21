@@ -1,0 +1,607 @@
+<div class="am-g am-panel am-panel-default">
+    <header class="am-panel-hd">
+        <h3 class="am-panel-title">公司快速搜索</h3>
+    </header>
+    <br/>
+    <!-- Search Panel -->
+    <div class="am-u-sm-12">
+        <div class="am-panel am-panel-default">
+            <div class="am-panel-bd">
+                <div class="am-g">
+                    <div class="am-u-sm-12">
+                        <div class="am-input-group am-input-group-secondary">
+                            <input type="text" class="am-form-field am-input-sm" placeholder="输入公司名称搜索" data-bind="value: searchEnterpriseName">
+                            <span class="am-input-group-btn">
+                                <button class="am-btn am-btn-secondary" type="button" data-bind="click:searchClick"><span class="am-icon-search"></span></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Search Result Table -->
+    <div class="am-u-sm-12">
+        <!-- Company Search Result -->
+        <div class="am-panel am-panel-secondary" id="panelCompany">
+            <div class="am-panel-hd">
+                <h3 class="am-panel-title" data-am-collapse="{parent: '#panelUnion', target: '#do-not-say-2'}">公司搜索结果</h3>
+            </div>
+            <div id="do-not-say-2" class="am-panel-collapse am-collapse am-in">
+                <div class="am-panel-bd">
+                    <table class="am-table am-table-bd am-table-striped am-table-hover">
+                        <thead>
+                        <tr>
+                            <th>企业名称</th><th>企业状态</th><th>区域</th><th>是否建会</th><th>地址</th><th>关联工会名称</th><th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody data-bind="foreach: companyList">
+                        <tr>
+                            <td data-bind="text: $data.name"></td>
+                            <td data-bind="text: $data.status.name"></td>
+                            <td data-bind="text: $data.subZone.name"></td>
+                            <td data-bind="text: $data.tradeUnionStatus"></td>
+                            <td data-bind="text: $data.addressDetail"></td>
+                            <td><a href="javascript:;" data-bind="text: $data.tradeUnion.name, click:$parent.getTradeUnionInfo"></a></td>
+                            <!-- ko if: $data.isNewRow == false -->
+                            <td>
+                                <div class="am-btn-toolbar">
+                                    <div class="am-btn-group am-btn-group-xs">
+                                        <button class="am-btn am-btn-secondary am-btn-xs" data-bind="click: $parent.modifyCompany"><span class="am-icon-pencil-square-o"></span> 详细</button>
+                                    </div>
+                                </div>
+                            </td>
+                            <!-- /ko -->
+                            <!-- ko if: $data.isNewRow == true -->
+                            <td>
+                                <div class="am-btn-toolbar">
+                                    <div class="am-btn-group am-btn-group-xs">
+                                        <button class="am-btn am-btn-success am-btn-xs" data-bind="click: $parent.addNewCompany"><span class="am-icon-copy"></span> 新增</button>
+                                    </div>
+                                </div>
+                            </td>
+                            <!-- /ko -->
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detail information -->
+    <div class="am-u-sm-12">
+        <!-- Company detail -->
+        <div class="am-panel am-panel-secondary am-hide" id="panelCompanyDetail">
+            <div class="am-panel-hd">
+                <h3 class="am-panel-title" data-am-collapse="{parent: '#panelUnion', target: '#do-not-say-5'}" data-bind="text: companyDetailTitle"></h3>
+            </div>
+            <div id="do-not-say-5" class="am-panel-collapse am-collapse">
+                <div class="am-panel-bd">
+                    <div class="am-g">
+                        <div class="am-u-md-12">
+                            <div class="am-panel am-panel-default">
+                                <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-company-1'}">基本信息<span class="am-icon-chevron-down am-fr" ></span></div>
+                                <div id="collapse-panel-company-1" class="am-panel-bd am-collapse am-in">
+                                    <fieldset disabled id="idFieldsetBaseinfo">
+                                        <div class="am-g">
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">单位名称:</span>
+                                                    <input type="text" class="am-form-field" data-bind="value: companyName" id="companyName"/>
+                                                </div>
+                                            </div>
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">单位组织机构代码:</span>
+                                                    <input type="text" class="am-form-field" data-bind="value: companyOrgCode" id="companyOrgCode"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="am-g">
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">单位代码:</span>
+                                                    <input type="text" class="am-form-field" data-bind="value: companyCode" id="companyCode"/>
+                                                </div>
+                                            </div>
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">单位类型:</span>
+                                                    <select data-am-selected="{maxHeight: 200, btnWidth: '100%', btnSize: 'sm', btnStyle: 'am-primary'}" class="am-selected"
+                                                            data-bind="value: selectedEnterpriseType,
+                                                            options: enterpriseTypeList, optionsText: 'name', optionsValue: 'id'" id="enterpriseType">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="am-g">
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">经济类型:</span>
+                                                    <select data-am-selected="{maxHeight: 200, btnWidth: '100%', btnSize: 'sm', btnStyle: 'am-primary'}" class="am-selected"
+                                                            data-bind="value: selectedEconomicType,
+                                                            options: economicTypeList, optionsText: 'name', optionsValue: 'id'" id="companyEconomicType">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">法人代表:</span>
+                                                    <input type="text" class="am-form-field" data-bind="value: companyRepresent" id="companyRepresent"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="am-g">
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">联系电话:</span>
+                                                    <input type="text" class="am-form-field" data-bind="value: companyPhone" id="companyPhone"/>
+                                                </div>
+                                            </div>
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">法人政治身份:</span>
+                                                    <select data-am-selected="{maxHeight: 200, btnWidth: '100%', btnSize: 'sm', btnStyle: 'am-primary'}" class="am-selected"
+                                                            data-bind="value: selectedLegalRepresentativePoliticalIdentity,
+                                                            options: legalRepresentativePoliticalIdentityList, optionsText: 'name', optionsValue: 'id'" id="companyRepresentPolitical">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="am-g">
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">法人政治身份级别:</span>
+                                                    <select data-am-selected="{maxHeight: 200, btnWidth: '100%', btnSize: 'sm', btnStyle: 'am-primary'}" class="am-selected"
+                                                            data-bind="value: selectedLegalRepresentativePoliticalLevel,
+                                                            options: legalRepresentativePoliticalLevelList, optionsText: 'name', optionsValue: 'id'" id="companyRepresentPoliticalLevel">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">法人荣誉称号:</span>
+                                                    <select data-am-selected="{maxHeight: 200, btnWidth: '100%', btnSize: 'sm', btnStyle: 'am-primary'}" class="am-selected"
+                                                            data-bind="value: selectedLegalRepresentativeHonour,
+                                                            options: legalRepresentativeHonourList, optionsText: 'name', optionsValue: 'id'" id="companyRepresentHonorary">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="am-g">
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">企业状态:</span>
+                                                    <select data-am-selected="{maxHeight: 200, btnWidth: '100%', btnSize: 'sm', btnStyle: 'am-primary'}" class="am-selected"
+                                                            data-bind="value: selectedstatus,
+                                                            options: statusList, optionsText: 'name', optionsValue: 'id'" id="companyStatus">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">重复企业:</span>
+                                                    <input type="text" class="am-form-field" data-bind="value: companyDuplicate" id="companyDuplicate"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="am-g">
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">职工人数:</span>
+                                                    <input type="text" class="am-form-field" data-bind="value: companyEmployeeNum" id="companyEmployeeNum"/>
+                                                </div>
+                                            </div>
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">会员人数:</span>
+                                                    <input type="text" class="am-form-field" data-bind="value: companyMemberNum" id="companyMemberNum"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="am-g">
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">劳务派遣工人数:</span>
+                                                    <input type="text" class="am-form-field" data-bind="value: companySourcingEmployeeNum" id="companySourcingEmployeeNum"/>
+                                                </div>
+                                            </div>
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">劳务派遣会员人数:</span>
+                                                    <input type="text" class="am-form-field" data-bind="value: companySourcingMemberNum" id="companySourcingMemberNum"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="am-g">
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">是否500强企业:</span>
+                                                    <select data-am-selected="{maxHeight: 200, btnWidth: '100%', btnSize: 'sm', btnStyle: 'am-primary'}" class="am-selected"
+                                                            data-bind="value: companyIsTop500,
+                                                            options: truefalseList, optionsText: 'name', optionsValue: 'id'" id="companyIsTop500">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">500强企业名称:</span>
+                                                    <input type="text" class="am-form-field" data-bind="value: companyTop500Name" id="companyTop500Name"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="am-g">
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">注册资金:</span>
+                                                    <input type="text" class="am-form-field" data-bind="value: companyRegisterAmount" id="companyRegisterAmount"/>
+                                                </div>
+                                            </div>
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">投资金额:</span>
+                                                    <input type="text" class="am-form-field" data-bind="value: companyInvestAmount" id="companyInvestAmount"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="am-g">
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">国别:</span>
+                                                    <input type="text" class="am-form-field" data-bind="value: companyCountry" id="companyCountry"/>
+                                                </div>
+                                            </div>
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">是否总部:</span>
+                                                    <select data-am-selected="{maxHeight: 200, btnWidth: '100%', btnSize: 'sm', btnStyle: 'am-primary'}" class="am-selected"
+                                                            data-bind="value: companyIsHeaderQuarter,
+                                                            options: truefalseList, optionsText: 'name', optionsValue: 'id'" id="companyIsHeaderQuarter">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="am-g">
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">总部类型:</span>
+                                                    <select data-am-selected="{maxHeight: 200, btnWidth: '100%', btnSize: 'sm', btnStyle: 'am-primary'}" class="am-selected"
+                                                            data-bind="value: selectedheadquartersType,
+                                                            options: headquartersTypeList, optionsText: 'name', optionsValue: 'id'" id="companyHeaderQuarterType">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">投资一亿美元以上企业:</span>
+                                                    <select data-am-selected="{maxHeight: 200, btnWidth: '100%', btnSize: 'sm', btnStyle: 'am-primary'}" class="am-selected"
+                                                            data-bind="value: companyIs10Million,
+                                                            options: truefalseList, optionsText: 'name', optionsValue: 'id'" id="companyIs10Million">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="am-g">
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">企业建立日期:</span>
+                                                    <input type="text" class="am-form-field wtu-datepicker" data-bind="value: companyCreateDate" data-am-datepicker readonly id="companyCreateDate"/>
+                                                </div>
+                                            </div>
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">备注:</span>
+                                                    <input type="text" class="am-form-field" data-bind="value: companyMemo"  id="companyMemo"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="am-g">
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">电子邮箱:</span>
+                                                    <input type="text" class="am-form-field" data-bind="value: email" id="email"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="am-g">
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">市:</span>
+                                                    <select data-am-selected="{maxHeight: 200, btnWidth: '100%', btnSize: 'sm', btnStyle: 'am-primary'}" class="am-selected"
+                                                            data-bind="value: selectedCity,
+                                                            options: addressCityList, optionsText: 'name', optionsValue: 'id'" id="companyAddress1">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">区:</span>
+                                                    <select data-am-selected="{maxHeight: 200, btnWidth: '100%', btnSize: 'sm', btnStyle: 'am-primary'}" class="am-selected"
+                                                            data-bind="value: selectedDistrict,
+                                                            options: addressDistrictList, optionsText: 'name', optionsValue: 'id'" id="companyAddress2">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="am-g">
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">县:</span>
+                                                    <select data-am-selected="{maxHeight: 200, btnWidth: '100%', btnSize: 'sm', btnStyle: 'am-primary'}" class="am-selected"
+                                                            data-bind="value: selectedZone,
+                                                            options: addressZoneList, optionsText: 'name', optionsValue: 'id'" id="companyAddress3">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">镇:</span>
+                                                    <select data-am-selected="{maxHeight: 200, btnWidth: '100%', btnSize: 'sm', btnStyle: 'am-primary'}" class="am-selected"
+                                                            data-bind="value: selectedSubZone,
+                                                            options: addressSubZoneList, optionsText: 'name', optionsValue: 'id'" id="companyAddress4">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="am-g">
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">详细地址:</span>
+                                                    <input type="text" class="am-form-field" data-bind="value: detailAddress" id="detailAddress"/>
+                                                </div>
+                                            </div>
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">邮编:</span>
+                                                    <input type="text" class="am-form-field" data-bind="value: zipCode" id="zipCode"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <ul class="am-list admin-content-task">
+                                            <li>
+                                                <div class="am-cf">
+                                                    <div class="am-btn-toolbar am-fr">
+                                                        <div class="am-btn-group am-btn-group-xs">
+                                                            <button type="button" class="am-btn am-btn-default" data-bind="click: editCompanyBasicInfo" id="btnEditCompanyBasicInfo"><span class="am-icon-pencil am-text-primary"></span></button>
+                                                            <button type="button" class="am-btn am-btn-default" data-bind="click: submitCompanyBasicInfo" id="btnSubmitCompanyBasicInfo"><span class="am-icon-check"></span></button>
+                                                            <button type="button" class="am-btn am-btn-default" data-bind="click: cancelCompanyBasicInfo" id="btnCancelCompanyBasicInfo"><span class="am-icon-times"></span></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="am-g am-hide" id="divUnionInfo">
+                        <div class="am-u-md-12">
+                            <div class="am-panel am-panel-default">
+                                <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-company-3'}">工会信息<span class="am-icon-chevron-down am-fr" ></span></div>
+                                <div id="collapse-panel-company-3" class="am-panel-bd am-collapse am-in">
+                                    <fieldset disabled id="idFieldsetUnionInfo">
+                                        <div class="am-g">
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">工会状态:</span>
+                                                    <select data-am-selected="{maxHeight: 200, btnWidth: '100%', btnSize: 'sm', btnStyle: 'am-primary'}" class="am-selected"
+                                                            data-bind="value: selectedunionEstabishStatus,
+                                                            options: unionEstabishStatusList, optionsText: 'value', optionsValue: 'code'" id="companyUnionStatus">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">走访日期:</span>
+                                                    <input type="text" class="am-form-field wtu-datepicker" data-bind="value: companyVisitDate" data-am-datepicker readonly id="companyVisitDate"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="am-g">
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">走访负责人:</span>
+                                                    <input type="text" class="am-form-field" data-bind="value: companyVisitContact" id="companyVisitContact"/>
+                                                </div>
+                                            </div>
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">走访记录:</span>
+                                                    <input type="text" class="am-form-field" data-bind="value: companyVisitRecord" id="companyVisitRecord"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="am-g">
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">关联工会代码:</span>
+                                                    <input type="text" class="am-form-field" data-bind="value: companyUnionCode" id="companyUnionCode" readonly/>
+                                                </div>
+                                            </div>
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">关联工会名称:</span>
+                                                    <input type="text" class="am-form-field" data-bind="value: companyUnionName" id="companyUnionName" readonly/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="am-g">
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">工会干事代码:</span>
+                                                    <input type="text" class="am-form-field" data-bind="value: companyContingentWorkerNum" id="companyContingentWorkerNum"/>
+                                                </div>
+                                            </div>
+                                            <!--<div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">工会干事名字:</span>
+                                                    <input type="text" class="am-form-field" data-bind="value: companyContingentWorkerName" id="companyContingentWorkerName"/>
+                                                </div>
+                                            </div>-->
+                                            <div class="am-u-sm-6">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">建会日期:</span>
+                                                    <input type="text" class="am-form-field wtu-datepicker" data-bind="value: companyUnionCreateDate" data-am-datepicker readonly id="companyUnionCreateDate"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <ul class="am-list admin-content-task">
+                                            <li>
+                                                <div class="am-cf">
+                                                    <div class="am-btn-toolbar am-fr">
+                                                        <div class="am-btn-group am-btn-group-xs">
+                                                            <button type="button" class="am-btn am-btn-default" data-bind="click: editCompanyUnionInfo" id="btnEditCompanyUnionInfo"><span class="am-icon-pencil am-text-primary"></span></button>
+                                                            <button type="button" class="am-btn am-btn-default" data-bind="click: submitCompanyUnionInfo" id="btnSubmitCompanyUnionInfo"><span class="am-icon-check"></span></button>
+                                                            <button type="button" class="am-btn am-btn-default" data-bind="click: cancelCompanyUnionInfo" id="btnCancelCompanyUnionInfo"><span class="am-icon-times"></span></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="am-g am-hide" id="divLinkUnion">
+                        <div class="am-u-md-6">
+                            <div class="am-panel am-panel-default" id="collapseLinkUnion">
+                                <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-company-5'}">关联工会<span class="am-icon-chevron-down am-fr" ></span></div>
+                                <div id="collapse-panel-company-5" class="am-panel-bd am-collapse am-in">
+                                    <fieldset>
+                                        <div class="am-g">
+                                            <div class="am-u-sm-12">
+                                                <button type="button" class="am-btn am-btn-secondary am-btn-block" data-bind="click: nav2CreateUnion">创建工会</button>
+                                            </div>
+                                            <br/>
+                                            <br/>
+                                            <div class="am-u-sm-12">
+                                                <div class="am-input-group am-input-group-secondary">
+                                                    <input type="text" class="am-form-field am-input-sm" placeholder="输入工会名称搜索" data-bind="value: searchUnionName">
+                                                    <span class="am-input-group-btn">
+                                                        <button class="am-btn am-btn-secondary" type="button" data-bind="click:searchUnionClick"><span class="am-icon-search"></span></button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="am-g am-hide" id="divLinkUnionSearchResult" style="min-height: 200px;">
+                                            <div class="am-u-sm-12">
+                                                <div class="am-input-group am-input-group-sm">
+                                                    <span class="am-input-group-label">公司搜索列表:</span>
+                                                    <select data-am-selected="{maxHeight: 200, btnWidth: '100%', btnSize: 'sm', btnStyle: 'am-primary'}" class="am-selected"
+                                                            data-bind="value: selectedUnion,
+                                                        options: unionList, optionsText: 'name', optionsValue: 'id'">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="am-g am-hide" id="divLinkUnions">
+                                            <table class="am-table am-table-striped am-table-hover am-table-compact">
+                                                <thead>
+                                                <tr>
+                                                    <th>工会名</th><th>工会性质</th><th>组织机构代码</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody data-bind="foreach: linkedUnionList">
+                                                <tr>
+                                                    <td data-bind="text: $data.name"></td>
+                                                    <td data-bind="text: $data.type.name"></td>
+                                                    <td data-bind="text: $data.orgCode"></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset>
+                                        <ul class="am-list admin-content-task">
+                                            <li>
+                                                <div class="am-cf">
+                                                    <div class="am-btn-toolbar am-fr">
+                                                        <div class="am-btn-group am-btn-group-xs">
+                                                            <button type="button" class="am-btn am-btn-default" data-bind="click: submitLinkUnion" disabled id="submitLinkUnion"><span class="am-icon-check">&nbsp;关联</span></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="am-modal am-modal-alert" tabindex="-1" id="enterprise-search-null">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">搜索企业结果</div>
+        <div class="am-modal-bd">
+            <div>
+                <label data-bind="text: app.ui.unionmanage.search.enterprise.result.null"></label>
+            </div>
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn">确定</span>
+        </div>
+    </div>
+</div>
+
+<div class="am-modal am-modal-alert" tabindex="-1" id="union-search-null">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">搜索工会结果</div>
+        <div class="am-modal-bd">
+            <div>
+                <label data-bind="text: app.ui.unionmanage.search.result.null"></label>
+            </div>
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn">确定</span>
+        </div>
+    </div>
+</div>
+<div class="am-modal am-modal-alert" tabindex="-1" id="errorAlert">
+    <div class="am-modal-dialog">
+        <div class="am-modal-hd">出错啦</div>
+        <div class="am-modal-bd" data-bind="foreach: errorMsgs">
+            <label class="checkbox">
+                <span data-bind="text: $data.message"></span>
+            </label>
+        </div>
+        <div class="am-modal-footer">
+            <span class="am-modal-btn">确定</span>
+        </div>
+    </div>
+</div>
+<a href="#" class="am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}">
+    <span class="am-icon-btn am-icon-th-list"></span>
+</a>
