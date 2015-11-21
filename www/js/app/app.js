@@ -116,66 +116,13 @@ define([
           on: [routeActions.dashboard]
         },
         '/admin':  {
-          '/register': {
-            on: [routeActions.admin.register]
-          },
           '/login': {
             on: [routeActions.admin.login]
-          },
-          '/forgetpassword': {
-            on: [routeActions.admin.forgetpassword]
-          },
-          '/settings': {
-            on: [routeActions.admin.settings]
           }
         },
         '/menu':  {
-          '/approval': {
-            on: [routeActions.menu.approval]
-          },
-          '/cardapproval': {
-            on: [routeActions.menu.cardapproval]
-          },
-          '/tenantapproval': {
-            on: [routeActions.menu.tenantapproval]
-          },
-          '/batchcreate': {
-            on: [routeActions.menu.batchcreate]
-          },
-          '/rolemanage': {
-            on: [routeActions.menu.rolemanage]
-          },
-          '/permissionmanage': {
-            on: [routeActions.menu.permissionmanage]
-          },
-          '/unionaddress': {
-            on: [routeActions.menu.unionaddress]
-          },
-          '/statistics': {
-            on: [routeActions.menu.statistics]
-          },
-          '/unionmanage': {
-            on: [routeActions.menu.unionmanage]
-          },
-          '/unionquicksearch/:unionId': {
-            on: [routeActions.menu.unionquicksearch]
-          },
-          '/unionquicksearch': {
-            on: [routeActions.menu.unionquicksearch]
-          },
-          '/enterprisequicksearch': {
-            on: [routeActions.menu.enterprisequicksearch]
-          },
-          '/userquicksearch': {
-            on: [routeActions.menu.userquicksearch]
-          }
-        },
-        '/navigation':  {
-          '/tagmanage': {
-            on: [routeActions.navigation.tagmanage]
-          },
-          '/quicksearch': {
-            on: [routeActions.navigation.quicksearch]
+          '/template': {
+            on: [routeActions.menu.template]
           }
         }
       },

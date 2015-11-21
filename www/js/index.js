@@ -46,9 +46,7 @@ var app = {
 app.initialize();
 
 $a = {
-    //servicesUrl : "http://139.196.51.219:9090/"
     servicesUrl : "http://127.0.0.1:9090/"
-    //servicesUrl : "http://192.168.1.102:9090/"
 };
 // Load common.js which configures requirejs.
 // common.js sets the baseUrl to be ./js/ so

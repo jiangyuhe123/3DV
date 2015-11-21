@@ -17,7 +17,7 @@ define([
 ){
     var viewModel = function(){
         var self = this;
-        self.template = "admin/forgetpassword-tpl";
+        self.template = "menu/template-tpl";
 
         self.myPostProcessingLogic = function(elements) {
 
