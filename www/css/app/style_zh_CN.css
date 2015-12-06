@@ -1,5 +1,4 @@
 /* Write your styles */
-body{ background: #eee;}
 
 .am-ext-bgc1{
     background-color: orangered;
@@ -492,13 +491,6 @@ gallery.html css
     font-size: 14px;
 }
 
-body{ background:#fafafa; }
-.wrapper{ }
-.nav-top{
-    line-height: 5rem;
-    border-bottom: 1px solid #dedede;
-}
-
 .my-form{margin-top:2rem;}
 .my-form .form-line{
     line-height: 4rem;
@@ -777,3 +769,21 @@ input.validationElement {
     vertical-align: middle;
     position: relative;
 }
+
+body {
+    font-family: Monospace;
+    background-color: #000;
+    color: #fff;
+    margin: 0px;
+    overflow: hidden;
+}
+#info {
+    color: #fff;
+    position: absolute;
+    top: 10px;
+    width: 100%;
+    text-align: center;
+    z-index: 400;
+    display:block;
+}
+#info a, .button { color: #f00; font-weight: bold; text-decoration: underline; cursor: pointer }

@@ -42,10 +42,10 @@ define([
 	// ROUTE ACTIONS
 	var routeActions = {
 		dashboard: function(){
-			createViewModel(null, {}, 'header', dom.header);
-			createViewModel(null, {}, 'navbar', dom.navbar);
-			createViewModel(null, {}, 'sidebar', dom.sidebar);
-			createViewModel(null, {}, 'dashboard', dom.content);
+			removeViewModel(dom.sidebar);
+			removeViewModel(dom.header);
+			removeViewModel(dom.navbar);
+			createViewModel(null, {}, 'menu/template', dom.content);
 		},
 		admin: {
 			login: function() {

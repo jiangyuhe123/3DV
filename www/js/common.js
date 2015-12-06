@@ -8,7 +8,12 @@ requirejs.config({
     'amazeui':					                'vendor/amazeui',
     'amazeui-widgets':                          'vendor/amazeui.widgets.helper',
     'handlebars':                               'vendor/handlebars.min',
-    'd3':                                       'vendor/d3.v2'
+    'd3':                                       'vendor/d3.v2',
+    'three':                                    'vendor/three',
+    'Detector':                                 'vendor/3modeljs/Detector',
+    'OBJLoader':                                'vendor/3modeljs/loaders/OBJLoader',
+    'OrbitControls':                            'vendor/3modeljs/controls/OrbitControls',
+    'dat-gui':                                  'vendor/3modeljs/libs/dat.gui.min'
   },
   shim: {
     // D3
@@ -18,7 +23,11 @@ requirejs.config({
     'd3':                                       { deps: [ 'jquery' ], exports: 'd3' },
     'amazeui':                                  ['jquery'],
     'amazeui-widgets':                          ['amazeui'],
-    'handlebars':                               ['amazeui-widgets']
+    'handlebars':                               ['amazeui-widgets'],
+    'Detector':                                 ['three'],
+    'OBJLoader':                                ['three'],
+    'OrbitControls':                            ['three'],
+    'dat-gui':                                  ['three']
   }
 });
 

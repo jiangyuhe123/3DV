@@ -57,84 +57,12 @@ define([
             $a.router.setRoute('/')
         };
 
-        var baseRoleCodeList = ['ADMIN','MEMBERCARD_MANAGER','PENDING_APPROVAL_POOL_MANAGER','TU_ROLE_MANAGER','TU_WORKER','TU_FUNDING_REVIEW_COMMITTEE_DIRECTOR',
-        'TU_CHAIRMAN','FEDERATION_TU_CHAIRMAN','ENTERPRISE_TU_CHAIRMAN'];
         // click action on the login button
         self.btnLoginClick = function() {
             progress.start();
-            var $modal = $('#login-fail');
             if (self.loginErrors().length == 0) {
-                $.ajax({
-                     headers : {
-                        'Content-Type' : 'application/x-www-form-urlencoded'
-                    },
-                    type : "POST",
-                    crossDomain: true,
-                    url : loginURL,
-                    data : "username=" + self.username() +"&password=" + self.password(),
-                    success : function(token) {
-                        $.cookie("token", token);
-                        self.saveCheckBoxCookie();
-                        //check user permission
-                        var getUserInfoURL = $a.servicesUrl + "tu/users/me?authToken="+token;
-                        $.ajax({
-                            type: "get",
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json",
-                            crossDomain: true,
-                            url: getUserInfoURL,
-                            success: function (json) {
-                                var isAdmin;
-                                if(typeof json.roles !== 'undefined'){
-                                    _.each(json.roles, function (role) {
-                                        if (role.category == 'EXTENDED') {
-                                            if($.inArray(role.parent.code, baseRoleCodeList) != -1){
-                                                if(typeof isAdmin === 'undefined'){
-                                                    isAdmin = true;
-                                                }
-                                            }
-                                        }
-                                        else {
-                                            if($.inArray(role.code, baseRoleCodeList)){
-                                                if(typeof isAdmin === 'undefined'){
-                                                    isAdmin = true;
-                                                }
-                                            }
-                                        }
-                                    });
-                                }
-                                if(isAdmin){
-                                    self.loginSuccess();
-                                }
-                                else{
-                                    var $modal2 = $('#login-fail-premission');
-                                    $modal2.modal();
-                                }
-                            },
-                            timeout: 1000,
-                            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                                self.errorMsgs([]);
-                                if(textStatus == 'error'){
-                                    self.errorMsgs.push({"message": "\u8bbf\u95ee\u7684\u8d44\u6e90\u4e0d\u5b58\u5728\uff01"});
-                                }
-                                else{
-                                    self.errorMsgs.push({"message": errorThrown.message});
-                                }
-                                var $modal = $('#errorAlert');
-                                $modal.modal();
-                            }
-                        });
-                    },
-                    error : function(XMLHttpRequest, textStatus, errorThrown) {
-                        $modal.modal();
-                        self.password("");
-                        self.password.isModified(false);
-                        self.loginsuccess(false);
-                    }
-                 })
-                    .always(function(){
-                        progress.done();
-                    });
+                progress.done();
+                self.loginSuccess();
             } else {
                 progress.done();
                 self.loginErrors.showAllMessages();
